@@ -4,7 +4,7 @@ var apple = 13.25;
 var lemon = -2;
 console.log(typeof apple);    //number 
 console.log(typeof lemon);    //number
-console.log(2 + "딸기");      //NaN   Not-a-Number
+console.log(2 * "딸기");      //NaN   Not-a-Number
 console.log(typeof Infinity);   //number
 console.log(typeof -Infinity);  //number
 

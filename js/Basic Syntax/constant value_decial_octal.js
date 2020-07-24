@@ -6,7 +6,7 @@ console.log(MIN_VALUE);
 
 //진수
 console.log(987);  //10진수
-console.log(0xFF);   //8진수 255 
+console.log(0xFF);   //16진수 255 
 console.log(0xff);  //225 (16*15 +15) 
 console.log(0xfff);  //4095  (16*16*15 + 16*15 + 15)  
 
