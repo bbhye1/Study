@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transform, Transition</title>
+    <style>
+        .box-container-transform {
+            display: flex;
+        }
+        
+        .box-transform {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 0, 0.7);
+            border: #000 2px solid;
+        }
+        
+        .box-transform:hover {
+            transform-origin: 100% 100%;
+            transform: scale(2) rotate(20deg) translate(10px, 20px);
+        }
+        
+        .box-container-transition {
+            display: flex;
+        }
+        
+        .box-transition {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 0, 0.7);
+            border: #000 2px solid;
+            transition: 1s 0.3s cubic-bezier(0, 1.32, 0.77, 1);
+        }
+        
+        .box-transition:hover {
+            width: 200px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>CSS Transform</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, alias nisi! Cum aspernatur explicabo numquam consequuntur nesciunt facilis sed ducimus quo recusandae est voluptatibus dicta sit, corrupti ullam, nam voluptatum. Lorem ipsum dolor sit
+        amet consectetur adipisicing elit. Explicabo mollitia fugit nostrum? Ipsum cupiditate debitis omnis. Suscipit aliquam, quas quia, expedita ipsa nesciunt repellendus laudantium minima distinctio cupiditate sequi. Dignissimos?</p>
+    <div class="box-container-transform">
+        <div class="box-transform">1</div>
+        <div class="box-transform">2</div>
+        <div class="box-transform">3</div>
+        <div class="box-transform">4</div>
+        <div class="box-transform">5</div>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, alias nisi! Cum aspernatur explicabo numquam consequuntur nesciunt facilis sed ducimus quo recusandae est voluptatibus dicta sit, corrupti ullam, nam voluptatum. Lorem ipsum dolor sit
+        amet consectetur adipisicing elit. Explicabo mollitia fugit nostrum? Ipsum cupiditate debitis omnis. Suscipit aliquam, quas quia, expedita ipsa nesciunt repellendus laudantium minima distinctio cupiditate sequi. Dignissimos?</p>
+    <h1>CSS Transition</h1>
+    <div class="box-container-transition">
+        <div class="box-transition">1</div>
+        <div class="box-transition">2</div>
+        <div class="box-transition">3</div>
+        <div class="box-transition">4</div>
+        <div class="box-transition">5</div>
+    </div>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, alias nisi! Cum aspernatur explicabo numquam consequuntur nesciunt facilis sed ducimus quo recusandae est voluptatibus dicta sit, corrupti ullam, nam voluptatum. Lorem ipsum dolor sit
+        amet consectetur adipisicing elit. Explicabo mollitia fugit nostrum? Ipsum cupiditate debitis omnis. Suscipit aliquam, quas quia, expedita ipsa nesciunt repellendus laudantium minima distinctio cupiditate sequi. Dignissimos?</p>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation</title>
+    <style>
+        @keyframes yellow-box {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(300px, 0);
+                background-color: red;
+            }
+            100% {
+                transform: translate(500px, 500px);
+            }
+        }
+        
+        .box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 0, 0.7);
+            border: #000 2px solid;
+            animation: yellow-box 3s linear forwards;
+            /* animation-direction: alternate; */
+        }
+        
+        .box:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Animation</h1>
+    <div class="box">Box</div>
+</body>
+
+</html>
