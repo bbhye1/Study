@@ -67,18 +67,15 @@
 
     <script>
         (function() {
-            const ilbuni = document.querySelectorAll('.ilbuni');
-            // const stage = document.querySelector('.stage');
+            const stage = document.querySelector('.stage');
 
             function clickHandler(e) {
-                console.log(this);
-                // stage.removeChild(this);
-                this.parentNode.removeChild(this);
-            }
-            for (let i = 0; i < ilbuni.length; i++) {
-                ilbuni[i].addEventListener('click', clickHandler);
-            }
+                if (e.target.classList.contains('ilbuni')) {
+                    stage.removeChild(e.target);
+                }
 
+            }
+            stage.addEventListener('click', clickHandler);
         })();
     </script>
 </body>
