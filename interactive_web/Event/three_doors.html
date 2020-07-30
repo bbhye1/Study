@@ -113,18 +113,28 @@
     <script>
         (function() {
             const stage = document.querySelector('.stage');
+            let currentItem;
+
+            function activate(elem) {
+                elem.classList.add('on');
+                currentItem = elem;
+            }
+
+            function unactivate(elem) {
+                elem.classList.remove('on');
+            }
 
             function clickHandler(event) {
                 const targetElem = event.target;
-                const currentItem = document.querySelector('.on');
                 if (currentItem) {
-                    currentItem.classList.remove('on');
+                    unactivate(currentItem);
                 };
                 if (targetElem.classList.contains('door-front')) {
-                    targetElem.parentNode.classList.add('on');
+                    activate(targetElem.parentNode);
                 };
             }
-            stage.addEventListener('click', clickHandler)
+            stage.addEventListener('click', clickHandler);
+            activate(document.querySelector('.door:first-child'));
         })();
     </script>
 </body>
