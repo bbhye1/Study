@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Doors</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <style>
+        .stage {
+            width: 100vw;
+            height: 100vh;
+            background-color: #333333;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .door {
+            position: relative;
+            width: 100px;
+            height: 150px;
+        }
+        
+        .door-back {
+            position: absolute;
+            background-color: #000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .ilbuni {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100px;
+            height: 100px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: 50% 100%;
+            transform: translate3d(100%, 0, 0);
+            transition: 0.5s 0.5s;
+        }
+        
+        .on .ilbuni {
+            transform: translate3d(0, 0, 0);
+        }
+        
+        .door:nth-child(1) .ilbuni {
+            background-image: url(./images/ilbuni_0.png);
+        }
+        
+        .door:nth-child(2) .ilbuni {
+            background-image: url(./images/ilbuni_1.png);
+        }
+        
+        .door:nth-child(3) .ilbuni {
+            background-image: url(./images/ilbuni_2.png);
+        }
+        
+        .door-front {
+            position: absolute;
+            background-color: rgb(255, 0, 0, 0.7);
+            width: 100%;
+            height: 100%;
+            transform-origin: left;
+            transition: 0.5s;
+        }
+        
+        .on .door-front {
+            transform: perspective(800px) rotateY(-110deg);
+        }
+        
+        .door:nth-child(1) .door-front {
+            background-color: rgb(255, 0, 0, 0.7);
+        }
+        
+        .door:nth-child(2) .door-front {
+            background-color: rgb(0, 255, 0, 0.7);
+        }
+        
+        .door:nth-child(3) .door-front {
+            background-color: rgb(0, 0, 255, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <div class="door">
+            <div class="door-back">
+                <div class="ilbuni"></div>
+            </div>
+            <div class="door-front"></div>
+        </div>
+        <div class="door">
+            <div class="door-back">
+                <div class="ilbuni"></div>
+            </div>
+            <div class="door-front"></div>
+        </div>
+        <div class="door">
+            <div class="door-back">
+                <div class="ilbuni"></div>
+            </div>
+            <div class="door-front"></div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const stage = document.querySelector('.stage');
+
+            function clickHandler(event) {
+                const targetElem = event.target;
+                const currentItem = document.querySelector('.on');
+                if (currentItem) {
+                    currentItem.classList.remove('on');
+                };
+                if (targetElem.classList.contains('door-front')) {
+                    targetElem.parentNode.classList.add('on');
+                };
+            }
+            stage.addEventListener('click', clickHandler)
+        })();
+    </script>
+</body>
+
+</html>
