@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Event</title>
+    <style>
+        @keyframes ball-ani {
+            from {
+                transform: translate(0, 0);
+            }
+            to {
+                transform: translate(200px, 200px);
+            }
+        }
+        
+        .ball {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: red;
+            transition: 0.5s;
+            animation: ball-ani 1s 3 forwards;
+        }
+        
+        .ball.end {
+            border: 3px solid dodgerblue;
+        }
+        
+        .ball.start {
+            border: 3px solid yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ball"></div>
+    <script>
+        const ballElem = document.querySelector('.ball');
+
+        function endAni(e) {
+            ballElem.classList.add('end');
+        }
+
+        function startAni(e) {
+            ballElem.classList.add('start');
+        }
+
+        function interactionAni(e) {
+            console.log('반복!');
+        }
+        window.addEventListener('animationend', endAni);
+        // window.addEventListener('animationstart', startAni);
+        // window.addEventListener('animationiteraction', interactionAni);
+    </script>
+</body>
+
+</html>
