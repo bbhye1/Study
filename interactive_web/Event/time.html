@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Control Timeout</title>
+    <style>
+        .btn {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn">취소</button>
+
+    <script>
+        const btn = document.querySelector('.btn');
+        let timeId;
+        let n = 0;
+
+        function sample() {
+            n++;
+            if (n > 200) {
+                return;
+            }
+            console.log('sample!');
+            timeId = requestAnimationFrame(sample);
+        };
+        sample();
+        // timeId = setInterval(sample, 100);
+        // timeId = setTimeout(sample, 3000);
+
+        function clearT() {
+            // clearTimeout(timeId);
+            // clearInterval(timeId);
+            cancelAnimationFrame(timeId);
+        }
+        btn.addEventListener('click', clearT)
+    </script>
+</body>
+
+</html>
