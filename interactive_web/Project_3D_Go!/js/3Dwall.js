@@ -12,16 +12,20 @@
         const scrollPer = pageYOffset / maxScrollValue;
         const zMove = scrollPer * 980 - 490;
         houseElem.style.transform = 'translateZ(' + zMove + 'vw)';
-        console.log(scrollPer);
         barElem.style.width = scrollPer * 100 + 'vw';
     }
 
     function mouseHandler(e) {
         const pointX = -1 + (e.clientX / window.innerWidth) * 2;
         const pointY = 1 - (e.clientY / window.innerHeight) * 2;
-        console.log(pointX, pointY)
         stageElem.style.transform = 'rotateY(' + pointX * 7 + 'deg) rotateX(' + pointY * 7 + 'deg)'
     }
+
+    function clickHandler(e) {
+        const clickpointX = e.clientX / innerWidth * 90;
+        new Character(clickpointX);
+    }
+    window.addEventListener('click', clickHandler);
     window.addEventListener('mousemove', mouseHandler);
     window.addEventListener('scroll', scrollHandler);
     resizeHandler();
