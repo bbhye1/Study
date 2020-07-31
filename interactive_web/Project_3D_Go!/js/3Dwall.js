@@ -1,6 +1,7 @@
 (function() {
     const houseElem = document.querySelector('.house');
     const stageElem = document.querySelector('.stage');
+    const barElem = document.querySelector('.progress-bar');
     let maxScrollValue;
 
     function resizeHandler() {
@@ -11,7 +12,8 @@
         const scrollPer = pageYOffset / maxScrollValue;
         const zMove = scrollPer * 980 - 490;
         houseElem.style.transform = 'translateZ(' + zMove + 'vw)';
-
+        console.log(scrollPer);
+        barElem.style.width = scrollPer * 100 + 'vw';
     }
 
     function mouseHandler(e) {
