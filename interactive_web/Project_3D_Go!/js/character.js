@@ -1,7 +1,7 @@
 function Character(info) {
     this.mainElem = document.createElement('div');
     this.mainElem.classList.add('character');
-    this.mainElem.style.left = info + '%';
+    this.mainElem.style.left = info.clickPosX + '%';
     this.mainElem.innerHTML =
         ` <div class="character-face-con character-head">
                 <div class="character-face character-head-face face-front"></div>
@@ -29,11 +29,41 @@ function Character(info) {
                 </div>`;
 
     document.querySelector('.stage').appendChild(this.mainElem);
+
+
+    this.scrollState = false;
+    this.lastScrollTop = 0;
     this.init();
 }
 
 
 Character.prototype = {
     constructor: Character,
-    init: function() {}
+    init: function() {
+        const self = this;
+
+        function charScroll() {
+            clearTimeout(self.scrollState);
+
+            if (!self.scrollState) {
+                self.mainElem.classList.add('running');
+            }
+
+            self.scrollState = setTimeout(function() {
+                self.scrollState = false;
+                self.mainElem.classList.remove('running');
+            }, 500);
+
+            if (self.lastScrollTop < pageYOffset) {
+                self.mainElem.setAttribute('data-direction', 'forward');
+                self.lastScrollTop = pageYOffset;
+            } else {
+                self.mainElem.setAttribute('data-direction', 'backward');
+                self.lastScrollTop = pageYOffset;
+            }
+        }
+
+        window.addEventListener('scroll', charScroll);
+    }
+
 }

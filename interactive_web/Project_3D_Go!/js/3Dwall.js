@@ -12,6 +12,7 @@
         const scrollPer = pageYOffset / maxScrollValue;
         const zMove = scrollPer * 980 - 490;
         houseElem.style.transform = 'translateZ(' + zMove + 'vw)';
+
         barElem.style.width = scrollPer * 100 + 'vw';
     }
 
@@ -22,8 +23,9 @@
     }
 
     function clickHandler(e) {
-        const clickpointX = e.clientX / innerWidth * 90;
-        new Character(clickpointX);
+        new Character({
+            clickPosX: e.clientX / innerWidth * 90,
+        });
     }
     window.addEventListener('click', clickHandler);
     window.addEventListener('mousemove', mouseHandler);

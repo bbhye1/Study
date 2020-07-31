@@ -7,6 +7,24 @@
     }
 }
 
+@keyframes ani-running-leg {
+    from {
+        transform: rotateX(25deg);
+    }
+    to {
+        transform: rotateX(-25deg);
+    }
+}
+
+@keyframes ani-running-arm {
+    from {
+        transform: rotateY(25deg);
+    }
+    to {
+        transform: rotateY(-25deg);
+    }
+}
+
 body {
     height: 500vw;
     background: #111;
