@@ -1,7 +1,7 @@
 function Character(info) {
     this.mainElem = document.createElement('div');
     this.mainElem.classList.add('character');
-    this.mainElem.style.left = info.clickPosX + '%';
+    this.mainElem.style.left = info.Xpos + '%';
     this.mainElem.innerHTML =
         ` <div class="character-face-con character-head">
                 <div class="character-face character-head-face face-front"></div>
@@ -33,6 +33,10 @@ function Character(info) {
 
     this.scrollState = false;
     this.lastScrollTop = 0;
+    this.Xpos = info.Xpos;
+    this.speed = info.speed;
+    this.runningState = false;
+    this.rafid;
     this.init();
 }
 
@@ -61,9 +65,51 @@ Character.prototype = {
                 self.mainElem.setAttribute('data-direction', 'backward');
                 self.lastScrollTop = pageYOffset;
             }
-        }
+        };
 
+        function charKeyMove(e) {
+            if (self.runningState) return;
+
+            if (e.keyCode == 37) {
+                self.mainElem.setAttribute('data-direction', 'left');
+                self.direction = 'left';
+                self.mainElem.style.left = self.PosX + '%';
+                self.mainElem.classList.add('running');
+                self.runningState = true;
+                self.run(self);
+            } else if (e.keyCode == 39) {
+                self.mainElem.setAttribute('data-direction', 'right');
+                self.direction = 'right';
+                self.mainElem.classList.add('running');
+                self.runningState = true;
+                self.run(self);
+            }
+        };
+
+        function charKeyStop(e) {
+            self.mainElem.removeAttribute('data-direction');
+            self.mainElem.classList.remove('running');
+            cancelAnimationFrame(self.rafId);
+            self.runningState = false;
+        };
+
+        window.addEventListener('keyup', charKeyStop);
+        window.addEventListener('keydown', charKeyMove);
         window.addEventListener('scroll', charScroll);
+    },
+    run: function(self) {
+        if (self.direction == 'left') {
+            self.Xpos -= self.speed;
+        } else if (self.direction == 'right') {
+            self.Xpos += self.speed;
+        }
+        self.mainElem.style.left = self.Xpos + '%';
+        if (self.Xpos < 3) {
+            self.Xpos = 3;
+        } else if (self.Xpos > 87) {
+            self.Xpos = 87;
+        }
+        self.rafId = requestAnimationFrame(function() { self.run(self) });
     }
 
 }

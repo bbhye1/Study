@@ -24,11 +24,13 @@
 
     function clickHandler(e) {
         new Character({
-            clickPosX: e.clientX / innerWidth * 90,
+            Xpos: e.clientX / innerWidth * 90,
+            speed: Math.random() * 0.5
         });
     }
     window.addEventListener('click', clickHandler);
     window.addEventListener('mousemove', mouseHandler);
     window.addEventListener('scroll', scrollHandler);
+    window.addEventListener('resize', resizeHandler);
     resizeHandler();
 })();
