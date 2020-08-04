@@ -27,28 +27,55 @@
 
     // Event listeners
     form.addEventListener('submit', function(e) {
+        if (re.test(input.value)) {
+            showSuccess(input);
+        } else {
+            showError(input, 'Email is not vaild');
+        }
+    }
+
+    //Check required fields
+    function checkRequiredField(inputArr) {
+        inputArr.forEach(function(input) {
+            if (input.value.trim() === '') {
+                showError(input, `${getFieldName(input)} is required`);
+            } else {
+                showSuccess(input);
+            }
+        });
+    };
+
+    // Check input lenth 
+    function checkLength(input, min, max) {
+        if (input.value.length < min) {
+            showError(input, `${getFieldName(input)} must be at least min ${min} characters`);
+        } else if (input.value.length > max) {
+            showError(input, `${getFieldName(input)} must be less than ${max} characters`)
+        } else {
+            showSuccess(input);
+        }
+    }
+
+    //Check password match
+    function checkPasswordMatch(input1, input2) {
+        if (input1.value !== input2.value) {
+            showError(input2, 'Passwords do not match')
+        }
+    }
+
+
+    // GEt fieldname
+    function getFieldName(input) {
+        return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+    };
+
+    // Event listeners
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        if (username.value === "") {
-            showError(username, 'Username is required');
-        } else {
-            showSuccess(username);
-        }
-        if (email.value === "") {
-            showError(email, 'email is required');
-        } else if (!isVaildEmail(email.value)) {
-            showError(email, 'email is not vaild');
-        } else {
-            showSuccess(email);
-        }
-        if (password.value === "") {
-            showError(password, 'password is required');
-        } else {
-            showSuccess(password);
-        }
-        if (password2.value === "") {
-            showError(password2, 'password is required');
-        } else {
-            showSuccess(password2);
-        }
-    })
+        checkRequiredField([username, email, password, password2]);
+        checkLength(username, 3, 15);
+        checkLength(password, 5, 25);
+        checkEmail(email);
+        checkPasswordMatch(password, password2);
+    });
 })();
