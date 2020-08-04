@@ -4,7 +4,7 @@
 }
 
 :root {
-    --sucess-color: #2ecc71;
+    --success-color: #2ecc71;
     --error-color: #e74c3c;
 }
 
@@ -33,6 +33,7 @@ h2 {
 
 .form {
     padding: 30px 40px;
+    width: 100%;
 }
 
 .form-control {
@@ -62,7 +63,7 @@ h2 {
 }
 
 .form-control.success input {
-    border-color: var(--succese-color);
+    border-color: var(--success-color);
 }
 
 .form-control.error input {
@@ -82,13 +83,14 @@ h2 {
 }
 
 .form button {
-    cursor: printer;
+    cursor: pointer;
     background: dodgerblue;
     border: 2px solid dodgerblue;
     border-radius: 4px;
     color: #fff;
     display: block;
-    font-size: 10px;
+    font-size: 16px;
+    padding: 10px;
     margin-top: 20px;
     width: 100%;
 }
