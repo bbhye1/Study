@@ -20,13 +20,8 @@
     }
 
     // Email Vaild 
-    function isVaildEmail(email) {
+    function checkEmail(input) {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
-
-    // Event listeners
-    form.addEventListener('submit', function(e) {
         if (re.test(input.value)) {
             showSuccess(input);
         } else {
