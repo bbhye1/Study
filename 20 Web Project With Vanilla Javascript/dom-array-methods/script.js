@@ -23,6 +23,16 @@
         addData(newUser);
     }
 
+    // Double everyone's money
+    function doubleMoney() {
+        data = data.map((item) => {
+            // item.money = item.money * 2;
+            // return item;
+            return {...item, money: item.money * 2 }
+        });
+        updateDOM();
+    }
+
     // Add new obj to data arr
     function addData(newUser) {
         data.push(newUser);
@@ -43,7 +53,6 @@
     }
 
     // Format number as money 
-
     function formatMoney(number) {
         return number.toLocaleString('en-US', {
             style: 'currency',
@@ -53,4 +62,5 @@
 
     //Event 
     addUserBtn.addEventListener('click', getRandomUser);
+    doubleMoneyBtn.addEventListener('click', doubleMoney);
 })();
