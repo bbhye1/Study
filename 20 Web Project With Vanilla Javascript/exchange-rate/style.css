@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+:root {
+    --primary-color: #5fbaa7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Serif', serif;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    background: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+.money-img {
+    width: 150px;
+    height: 150px;
+}
+
+h1 {
+    color: var(--primary-color);
+}
+
+p {
+    text-align: center;
+}
+
+.currency {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+.currency select {
+    background: transparent;
+    font-size: 1rem;
+    padding: 10px 20px 10px 10px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1px solid #dedede;
+    border-radius: 4%;
+    cursor: pointer;
+}
+
+.currency input {
+    text-align: right;
+    background: transparent;
+    font-size: 2rem;
+    border: none;
+}
+
+.swap-rate-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rate {
+    color: var(--primary-color);
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.btn {
+    color: #fff;
+    background: var(--primary-color);
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+select:focus,
+input:focus,
+button:focus {
+    outline: 0;
+}
+
+@media (max-width: 600px) {
+    .currency input {
+        width: 200px;
+    }
+}
