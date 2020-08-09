@@ -27,23 +27,26 @@
                         resultHeading.innerHTML = `<h2>Search results for '${term}':</h2>`;
 
                         if (data.meals === null) {
-                            resultHeading.innerHTML = 'There are no search results. Try again';
+                            resultHeading.innerHTML = `<p>There are no search results. Try again!<p>`;
                         } else {
-                            mealsElem.innerHTML = data.meals.map(meal => `
+                            mealsElem.innerHTML = data.meals
+                                .map(
+                                    meal => `
                         <div class="meal">
-                            <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
-                            <div class="meal-info" data-mealID="${meal.idMeal}">
-                                <h3>${meal.strMeal}</h3>
-                            </div>
-                            </div>
-                       `)
+                          <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+                          <div class="meal-info" data-mealID="${meal.idMeal}">
+                            <h3>${meal.strMeal}</h3>
+                          </div>
+                        </div>
+                      `
+                                )
                                 .join('');
                         }
                     });
-                //Clear search text
+                // Clear search text
                 search.value = '';
             } else {
-                alert('Please emter a search term');
+                alert('Please enter a search term');
             }
         }
 
@@ -57,6 +60,23 @@
                     addMealToDOM(meal);
                 })
         }
+
+        //Fetch random meal from API
+        function getRandomMeal() {
+            //Clear meals and heading
+            mealsElem.innerHTML = '';
+            resultHeading.innerHTML = '';
+
+
+            fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+                .then(res => res.json())
+                .then(data => {
+                    const meal = data.meals[0];
+
+                    addMealToDOM(meal);
+                });
+        }
+
         //Add meal to DOM
         function addMealToDOM(meal) {
             const ingredients = [];
@@ -92,6 +112,7 @@
 
     //Event listeners
     submit.addEventListener('submit', searchMeal);
+    random.addEventListener('click', getRandomMeal);
 
     mealsElem.addEventListener('click', e => {
         const mealInfo = e.path.find(item => {
@@ -106,5 +127,6 @@
             const mealID = mealInfo.getAttribute('data-mealID');
             getMealByID(mealID);
         }
-    })
+    });
+
 })();
