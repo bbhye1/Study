@@ -1,0 +1,48 @@
+const settingsBtn = document.getElementById('settings-btn');
+const settings = document.getElementById('settings');
+const difficulty = document.getElementById('difficulty');
+const word = document.getElementById('word');
+const text = document.getElementById('text');
+const timeElem = document.getElementById('time');
+const scoreElem = document.getElementById('score');
+const reload = document.getElementById('reload');
+const endGameContainer = document.getElementById('end-game-container');
+
+//Init time
+let time = 10;
+
+//Init score
+let score = 0;
+
+showWord();
+
+//Generate random word
+async function generateRandomWords() {
+    const res = await fetch(`https://random-word-api.herokuapp.com/word?number=1`);
+    const data = await res.json();
+    return data[0];
+}
+
+//Show word in DOM
+async function showWord() {
+    const randomWord = await generateRandomWords();
+    word.innerHTML = randomWord;
+}
+
+//Update score 
+function updateScore() {
+    score++;
+    scoreElem.innerText = score;
+}
+
+//Update score
+text.addEventListener('input', e => {
+    let insertedWord = e.target.value;
+    if (insertedWord === word.innerText) {
+        showWord();
+        updateScore();
+
+        //Clear
+        e.target.value = '';
+    }
+})
