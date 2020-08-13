@@ -1,6 +1,7 @@
 (function() {
     const clearBtn = document.getElementById('clear');
     const showBtn = document.getElementById('show');
+    const hideBtn = document.getElementById('hide');
     const cardsContainer = document.getElementById('cards-container');
     const prevBtn = document.getElementById('prev');
     const nextBtn = document.getElementById('next');
@@ -15,10 +16,10 @@
     let currentActiveCard = 0;
 
     //Store DOM cards
-    const cardEl = [];
+    let cardEl = [];
 
     //Store card data 
-    const cardData = [{
+    let cardData = [{
             question: 'question 1',
             answer: 'answer 1'
         },
@@ -73,4 +74,53 @@
     }
 
     createCards();
+
+    //Event listener 
+    nextBtn.addEventListener('click', () => {
+        cardEl[currentActiveCard].className = 'card left';
+        currentActiveCard += 1;
+
+        if (currentActiveCard > cardEl.length - 1) {
+            currentActiveCard = cardEl.length - 1;
+        }
+
+        cardEl[currentActiveCard].className = 'card active';
+
+        updateCurrentText();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        cardEl[currentActiveCard].className = 'card right';
+        currentActiveCard -= 1;
+
+        if (currentActiveCard < 0) {
+            currentActiveCard = 0;
+        }
+
+        cardEl[currentActiveCard].className = 'card active';
+
+        updateCurrentText();
+    });
+
+    //Show add container
+    showBtn.addEventListener('click', () => {
+        addContainer.classList.add('show');
+    });
+
+    //Close add container
+    hideBtn.addEventListener('click', () => {
+        addContainer.classList.remove('show');
+        questionEl.value = '';
+        answerEl.value = '';
+    });
+
+    //Clear all cards
+    clearBtn.addEventListener('click', () => {
+        currentActiveCard = 0;
+        cardEl = [];
+        cardData = [];
+        cardsContainer.innerHTML = ''
+        updateCurrentText();
+    });
+
 })();
