@@ -16,23 +16,10 @@
     let currentActiveCard = 0;
 
     //Store DOM cards
-    let cardEl = [];
+    const cardEl = [];
 
     //Store card data 
-    let cardData = [{
-            question: 'question 1',
-            answer: 'answer 1'
-        },
-        {
-            question: 'question 2',
-            answer: 'answer 2'
-        },
-        {
-            question: 'question 3',
-            answer: 'answer 3'
-        }
-    ]
-
+    const cardData = getCardsData();
 
     //Create all cards 
     function createCards() {
@@ -46,7 +33,6 @@
 
         if (index === 0) {
             card.classList.add('active');
-
         }
 
         card.innerHTML = `
@@ -59,7 +45,6 @@
             </div>
         </div>`
 
-
         card.addEventListener('click', () => card.classList.toggle('show-answer'));
 
         //Add to DOM cards
@@ -71,6 +56,19 @@
 
     function updateCurrentText() {
         currentEl.innerText = `${currentActiveCard + 1} / ${cardData.length}`
+    }
+
+    //Get data from local storage
+    function getCardsData() {
+        const data = JSON.parse(localStorage.getItem('cards'));
+        return data === null ? [] : data;
+    }
+
+
+    //Set data to local storage
+    function setCardsData(cards) {
+        localStorage.setItem('cards', JSON.stringify(cards));
+        window.location.reload();
     }
 
     createCards();
@@ -114,13 +112,30 @@
         answerEl.value = '';
     });
 
+    //Store data in local storage
+    addCardBtn.addEventListener('click', () => {
+        const question = questionEl.value;
+        const answer = answerEl.value;
+
+        if (question.trim() && answer.trim()) {
+            const newCard = { question, answer };
+
+            createCard(newCard);
+
+            questionEl.value = '';
+            answerEl.value = '';
+            addContainer.classList.remove('show');
+
+            cardData.push(newCard);
+            setCardsData(cardData);
+        }
+    })
+
     //Clear all cards
     clearBtn.addEventListener('click', () => {
-        currentActiveCard = 0;
-        cardEl = [];
-        cardData = [];
+        localStorage.clear();
         cardsContainer.innerHTML = ''
-        updateCurrentText();
+        window.location.reload();
     });
 
 })();
