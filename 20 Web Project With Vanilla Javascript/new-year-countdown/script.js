@@ -29,4 +29,11 @@ function updateTime() {
     seconds.innerText = s < 10 ? '0' + s : s;
 }
 
+//show spinner before countdown
+setTimeout(() => {
+    loading.remove();
+    countdown.style.display = "flex";
+}, 1000)
+
+//Run every second
 setInterval(updateTime, 1000);
