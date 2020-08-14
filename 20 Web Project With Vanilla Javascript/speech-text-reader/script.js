@@ -73,7 +73,7 @@ function createBox(item) {
     //@todo - speak event
     box.addEventListener('click', () => {
         setTextMessage(text);
-        speekVoice();
+        speakVoice();
 
         //Add active effect
         box.classList.add('active');
@@ -108,15 +108,30 @@ function setTextMessage(text) {
 }
 
 //Speak text 
-function speekVoice() {
+function speakVoice() {
     speechSynthesis.speak(message);
 }
+
+//Set voices 
+function setVoice(e) {
+    message.voice = voices.find(voice => voice.name === e.target.value);
+}
+
 
 //Voices changed
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
+//Change voice
+voiceSelect.addEventListener('change', setVoice);
+
 //Open and close text box
 toggleBtn.addEventListener('click', () => textBox.classList.toggle('show'));
 closeBtn.addEventListener('click', () => textBox.classList.remove('show'));
+
+//Read textarea
+readBtn.addEventListener('click', () => {
+    setTextMessage(textarea.value);
+    speakVoice();
+})
 
 getVoices();
