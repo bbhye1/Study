@@ -4,6 +4,7 @@ const closeBtn = document.getElementById('close');
 const voiceSelect = document.getElementById('voices');
 const textarea = document.getElementById('text');
 const readBtn = document.getElementById('read');
+const textBox = document.querySelector('.text-box');
 
 
 const data = [{
@@ -58,7 +59,6 @@ const data = [{
 
 data.forEach(createBox);
 
-
 //Create speech boxes
 function createBox(item) {
     const box = document.createElement('div');
@@ -67,9 +67,56 @@ function createBox(item) {
 
     box.innerHTML = `
     <img src="${image}" alt="${text}">
-    <p>${text}</p>`;
+    <p class="info">${text}</p>`;
 
-    main.appendChild(box);
 
     //@todo - speak event
+    box.addEventListener('click', () => {
+        setTextMessage(text);
+        speekVoice();
+
+        //Add active effect
+        box.classList.add('active');
+
+        setTimeout(() => {
+            box.classList.remove('active')
+        }, 800);
+    })
+
+    main.appendChild(box);
 }
+
+//Init speech synth
+const message = new SpeechSynthesisUtterance();
+
+//Store voices
+let voices = [];
+
+function getVoices() {
+    voices = window.speechSynthesis.getVoices();
+    voices.forEach(voice => {
+        const option = document.createElement('option');
+        option.value = voice.name;
+        option.innerText = `${voice.name}${voice.lang}`;
+        voiceSelect.appendChild(option);
+    })
+}
+
+//Set text message
+function setTextMessage(text) {
+    message.text = text;
+}
+
+//Speak text 
+function speekVoice() {
+    speechSynthesis.speak(message);
+}
+
+//Voices changed
+speechSynthesis.addEventListener('voiceschanged', getVoices);
+
+//Open and close text box
+toggleBtn.addEventListener('click', () => textBox.classList.toggle('show'));
+closeBtn.addEventListener('click', () => textBox.classList.remove('show'));
+
+getVoices();
