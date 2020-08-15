@@ -1,4 +1,4 @@
-const msg = document.getElementById('msg');
+const msgEl = document.getElementById('msg');
 
 const randomNum = getRandomNumber();
 
