@@ -40,11 +40,10 @@ async function createList() {
         .map(a => a.value)
         .forEach((movie, index) => {
             const listItem = document.createElement('li');
-            listItem.setAttribute('data-rank', movie.rank);
             listItem.setAttribute('data-index', index);
             listItem.innerHTML = `
                 <span>${index + 1}</span>
-                    <div class="draggable" draggable="true" >
+                    <div class="draggable" draggable="true" data-rank="${movie.rank}" >
                         <p>${movie.movieNm}</p> <i class="fas fa-grip-lines"></i></div>
             `
             listItems.push(listItem);
@@ -90,6 +89,24 @@ function swapItems(fromIndex, toIndex) {
     listItems[toIndex].appendChild(itemOne);
 }
 
+//Check the order of list items
+function checkOrder() {
+    const draggables = document.querySelectorAll('.draggable-list li');
+    draggables.forEach(draggable => {
+        const index = +(draggable.getAttribute('data-index'));
+        const rank = +(draggable.children[1].getAttribute('data-rank'));
+        if (index + 1 === rank) {
+            draggable.classList.add('right');
+            draggable.classList.remove('wrong');
+            console.log(index + 1, rank);
+        } else {
+            draggable.classList.add('wrong');
+            draggable.classList.remove('right');
+            console.log(index + 1, rank);
+        }
+    })
+}
+
 
 // Event listeners
 function addEventListeners() {
@@ -97,15 +114,14 @@ function addEventListeners() {
     const dragListItems = document.querySelectorAll('.draggable-list li');
     draggables.forEach(draggable => {
         draggable.addEventListener('dragstart', dragStart);
-
     });
 
-    draggables.forEach(item => {
+    dragListItems.forEach(item => {
         item.addEventListener('dragover', dragOver);
         item.addEventListener('drop', dragDrop);
         item.addEventListener('dragenter', dragEnter);
         item.addEventListener('dragleave', dragLeave);
     });
-
-
 }
+
+checkBtn.addEventListener('click', checkOrder);
