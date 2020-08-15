@@ -1,0 +1,79 @@
+ * {
+     box-sizing: border-box;
+ }
+ 
+ :root {
+     --border-color: #e3e5e4;
+     --background-color: #c3c7ca;
+     --text-color: #34444f;
+ }
+ 
+ body {
+     background: #fff;
+     margin: 0;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+     height: 100vh;
+ }
+ 
+ button {
+     outline: 0;
+     border: 0;
+     font-size: 16px;
+     background: var(--background-color);
+     padding: 10px 20px;
+     margin-bottom: 20px;
+ }
+ 
+ button:active {
+     transform: scale(0.97);
+ }
+ 
+ ul {
+     list-style-type: none;
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ li {
+     display: flex;
+     flex-direction: row;
+     margin: 0;
+     border: 1px var(--border-color) solid;
+ }
+ 
+ li span {
+     background: var(--background-color);
+     color: var(--text-color);
+     width: 60px;
+     height: 60px;
+     font-size: 30px;
+     line-height: 60px;
+     margin: 0;
+ }
+ 
+ li.right p {
+     color: #3ae374;
+ }
+ 
+ li.wrong p {
+     color: #ff3838;
+ }
+ 
+ li.over .draggable {
+     background: #eaeaea;
+ }
+ 
+ .draggable {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     align-items: center;
+     background: #fff;
+     padding: 0 25px;
+     width: 400px;
+     cursor: pointer;
+ }
