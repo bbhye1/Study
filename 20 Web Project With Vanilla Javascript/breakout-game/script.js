@@ -25,7 +25,7 @@ const paddle = {
     y: canvas.height - 20,
     width: 80,
     height: 10,
-    speed: 84,
+    speed: 4,
     dx: 0
 };
 
@@ -87,15 +87,63 @@ function drawBricks() {
     })
 }
 
+//Move paddle on canvas
+function movePaddle() {
+    paddle.x += paddle.dx;
+
+    //wall detection
+    if (paddle.x + paddle.width > canvas.width) {
+        paddle.x = canvas.width - paddle.width;
+    }
+
+    if (paddle.x < 0) {
+        paddle.x = 0;
+    }
+}
+
 //Draw everything
 function draw() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
     drawBall();
     drawPaddle();
     drawScore();
     drawBricks();
 }
 
-draw();
+// Update canvas drawing and animation
+function update() {
+    movePaddle();
+
+    // Draw everything
+    draw();
+
+    requestAnimationFrame(update);
+}
+
+update();
+
+// keyDown event
+function keyDown(e) {
+    if (e.keyCode === 39) {
+        paddle.dx = paddle.speed;
+    } else if (e.keyCode === 37) {
+        paddle.dx = -paddle.speed;
+    }
+}
+// keyUp event
+function keyUp(e) {
+    if (e.keyCode === 39 ||
+        e.keyCode === 37) {
+        paddle.dx = 0;
+    }
+}
+
+
+// Keybord event handlers
+document.addEventListener('keydown', keyDown);
+document.addEventListener('keyup', keyUp);
 
 
 // Rules and close event handler
