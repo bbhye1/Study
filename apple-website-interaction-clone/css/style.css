@@ -24,6 +24,10 @@ a {
     text-decoration: none;
 }
 
+.container {
+    overflow-x: hidden;
+}
+
 .global-nav {
     position: absolute;
     top: 0;
@@ -80,9 +84,11 @@ a {
     display: flex;
     align-content: center;
     justify-content: center;
+    top: 35vh;
     margin: 5px 0;
     height: 3em;
     font-size: 2.5rem;
+    opacity: 0;
 }
 
 .main-message p {
@@ -119,12 +125,23 @@ a {
 .desc-message {
     width: 50%;
     font-weight: bold;
+    opacity: 0;
 }
 
 .pin {
     width: 1px;
     height: 100px;
     background: var(--main-color);
+}
+
+#scroll-section-2 .b {
+    top: 10%;
+    left: 40%;
+}
+
+#scroll-section-2 .c {
+    top: 15%;
+    left: 45%;
 }
 
 .mid-message {
@@ -157,6 +174,13 @@ a {
     height: 7rem;
 }
 
+.sticky-elem {
+    display: none;
+    position: fixed;
+    left: 0;
+    width: 100%;
+}
+
 @media(min-width:1024px) {
     #scroll-section-0 h1 {
         font-size: 9vw;
@@ -179,20 +203,19 @@ a {
     .desc-message {
         width: 20%;
     }
+    #scroll-section-2 .b {
+        top: 20%;
+        left: 53%;
+    }
+    #scroll-section-2 .c {
+        left: 55%;
+    }
     .mid-message {
         font-size: 4vw;
     }
     .canvas-caption {
         font-size: 2rem;
     }
-}
-
-.sticky-elem {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
 }
 
 #show-scene-0 #scroll-section-0 .sticky-elem,
