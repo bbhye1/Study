@@ -95,7 +95,10 @@
                 rect1X: [0, 0, { start: 0, end: 0 }],
                 rect2X: [0, 0, { start: 0, end: 0 }],
                 rectStartY: 0,
-
+                blendHeight: [0, 0, { start: 0, end: 0 }],
+                canvas_scale: [0, 0, { start: 0, end: 0 }],
+                canvasCaption_opacity: [0, 1, { start: 0, end: 0 }],
+                canvasCaption_translateY: [20, 0, { start: 0, end: 0 }],
             }
         },
     ];
@@ -326,6 +329,7 @@
                 break;
 
             case 3:
+                let step = 0;
                 const widthRatio = window.innerWidth / objs.canvas.width;
                 const heightRatio = window.innerHeight / objs.canvas.height;
                 let canvasScaleRatio;
@@ -368,6 +372,53 @@
                     objs.canvas.height
                 );
 
+                if (scrollRatio < values.rect1X[2].end) {
+                    step = 1;
+                    objs.canvas.classList.remove('sticky');
+                } else {
+                    step = 2;
+
+                    values.blendHeight[0] = 0;
+                    values.blendHeight[1] = objs.canvas.height;
+                    values.blendHeight[2].start = values.rect1X[2].end;
+                    values.blendHeight[2].end = values.rect1X[2].end + 0.2;
+                    const blendHeight = calcValues(values.blendHeight, currentYOffset);
+
+                    objs.context.drawImage(
+                        objs.images[1], 0, objs.canvas.height - blendHeight, objs.canvas.width, blendHeight, 0, objs.canvas.height - blendHeight, objs.canvas.width, blendHeight,
+                    );
+
+                    objs.canvas.classList.add('sticky');
+                    objs.canvas.style.top = `${-(objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2}px`
+
+                    if (scrollRatio > values.blendHeight[2].end) {
+                        values.canvas_scale[0] = canvasScaleRatio;
+                        values.canvas_scale[1] = document.body.offsetWidth / (objs.canvas.width * 1.5);
+                        values.canvas_scale[2].start = values.blendHeight[2].end;
+                        values.canvas_scale[2].end = values.canvas_scale[2].start + 0.2;
+
+                        objs.canvas.style.transform = `scale(${calcValues(values.canvas_scale, currentYOffset)})`;
+                    }
+
+                    if (scrollRatio > values.canvas_scale[2].end &&
+                        values.canvas_scale[2].end > 0) {
+                        objs.canvas.classList.remove('sticky');
+                        objs.canvas.style.marginTop = `${scrollHeight*0.4}px`;
+
+                        values.canvasCaption_opacity[2].start = values.canvas_scale[2].end;
+                        values.canvasCaption_opacity[2].end = values.canvasCaption_opacity[2].start + 0.1;
+
+                        values.canvasCaption_translateY[2].start = values.canvas_scale[2].end;
+                        values.canvasCaption_translateY[2].end = values.canvasCaption_opacity[2].start + 0.1;
+
+                        objs.canvasCaption.style.opacity = calcValues(values.canvasCaption_opacity, currentYOffset);
+                        objs.canvasCaption.style.transfrom = `translate3d(0, ${calcValues(values.canvasCaption_translateY, currentYOffset)},0)`;
+
+                    } else {
+                        objs.canvas.style.marginTop = 0;
+                    }
+                }
+
                 break;
         }
     }
@@ -396,6 +447,15 @@
     }
     setCanvasImages();
 
+    function checkMenu() {
+        if (yOffset > 44) {
+            document.body.classList.add('local-nav-sticky');
+        } else {
+            document.body.classList.remove('local-nav-sticky');
+
+        }
+    }
+
     window.addEventListener('load', () => {
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
         setLayout();
@@ -404,6 +464,7 @@
     window.addEventListener('scroll', () => {
         yOffset = window.pageYOffset;
         scrollLoop();
+        checkMenu();
     });
 
     setLayout();

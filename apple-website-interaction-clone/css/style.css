@@ -59,7 +59,17 @@ a {
     height: 52px;
     padding: 0 1rem;
     border-bottom: 1px solid #ddd;
-    z-index: 4;
+    z-index: 11;
+}
+
+.local-nav-sticky .local-nav {
+    position: fixed;
+    top: 0;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: saturate(180%) blur(15px);
+    -moz-backdrop-filter: saturate(180%) blur(15px);
+    -o-backdrop-filter: saturate(180%) blur(15px);
+    backdrop-filter: saturate(180%) blur(15px);
 }
 
 .local-nav-links a:not(.product-name) {
@@ -151,7 +161,7 @@ a {
 }
 
 .mid-message {
-    max-width: 1000px;
+    width: 1000px;
     margin: 0 auto;
     padding: 0 1rem;
     font-size: 2rem;
@@ -165,7 +175,7 @@ a {
 
 .canvas-caption {
     max-width: 1000px;
-    margin: 0 auto;
+    margin: -5em auto 0;
     padding: 0 1rem;
     font-size: 1.2rem;
     color: #888;
@@ -202,6 +212,7 @@ a {
     }
     .description {
         font-size: 2rem;
+        padding: 0;
     }
     .description strong {
         font-size: 6rem;
@@ -218,9 +229,11 @@ a {
     }
     .mid-message {
         font-size: 4vw;
+        padding: 0;
     }
     .canvas-caption {
         font-size: 2rem;
+        padding: 0;
     }
 }
 
@@ -240,6 +253,11 @@ a {
     position: absolute;
     top: 50%;
     left: 50%;
+}
+
+.image-blend-canvas.sticky {
+    position: fixed;
+    top: 0;
 }
 
 #scroll-section-3 {
