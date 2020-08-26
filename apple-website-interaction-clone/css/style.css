@@ -161,7 +161,7 @@ a {
 }
 
 .mid-message {
-    width: 1000px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0 1rem;
     font-size: 2rem;
@@ -228,10 +228,12 @@ a {
         left: 55%;
     }
     .mid-message {
+        width: 1000px;
         font-size: 4vw;
         padding: 0;
     }
     .canvas-caption {
+        margin-top: -8rem;
         font-size: 2rem;
         padding: 0;
     }

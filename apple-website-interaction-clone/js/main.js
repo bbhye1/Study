@@ -1,4 +1,14 @@
 (() => {
+    let yOffset = 0;
+    let prevScrollHeight = 0;
+    let currentScene = 0;
+    let enterNewScene = false;
+
+    let acc = 0.1;
+    let delayedYOffset = 0;
+    let rafId;
+    let rafState;
+
     const sceneInfo = [{
             type: 'sticky',
             heightNum: 5, // 브라우저 높이의 5배로 scrollHeight 세팅
@@ -103,11 +113,6 @@
         },
     ];
 
-    let yOffset = 0;
-    let prevScrollHeight = 0;
-    let currentScene = 0;
-    let enterNewScene = false;
-
     function setLayout() {
         for (let i = 0; i < sceneInfo.length; i++) {
             if (sceneInfo[i].type === 'sticky') {
@@ -144,13 +149,13 @@
             prevScrollHeight += sceneInfo[i].scrollHeight;
         }
 
-        if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+        if (delayedYOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
             enterNewScene = true;
             currentScene++;
             document.body.setAttribute('id', `show-scene-${currentScene}`);
 
         }
-        if (yOffset < prevScrollHeight) {
+        if (delayedYOffset < prevScrollHeight) {
             enterNewScene = true;
             if (currentScene < 0) return;
             currentScene--;
@@ -172,6 +177,7 @@
             const partScrollStart = values[2].start * scrollHeight;
             const partScrollEnd = values[2].end * scrollHeight;
             const partScrollHeight = partScrollEnd - partScrollStart;
+
             if (currentYOffset >= partScrollStart && currentYOffset <= partScrollEnd) {
                 rv = (currentYOffset - partScrollStart) / partScrollHeight * (values[1] - values[0]) + values[0];
             } else if (currentYOffset < partScrollStart) {
@@ -194,8 +200,8 @@
 
         switch (currentScene) {
             case 0:
-                const sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
-                objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                // const sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence], 0, 0);
                 objs.canvas.style.opacity = calcValues(values.video_opacity, currentYOffset);
 
                 if (scrollRatio <= 0.22) {
@@ -241,17 +247,14 @@
                 break;
 
             case 2:
-                const sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
-                objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
+                // const sequence2 = Math.round(calcValues(values.imageSequence, currentYOffset));
+                // objs.context.drawImage(objs.videoImages[sequence2], 0, 0);
 
                 if (scrollRatio <= 0.5) {
                     objs.canvas.style.opacity = calcValues(values.video_opacity_in, currentYOffset);
                 } else {
                     objs.canvas.style.opacity = calcValues(values.video_opacity_out, currentYOffset);
                 }
-
-
-
 
                 if (scrollRatio <= 0.32) {
                     // in
@@ -398,6 +401,7 @@
                         values.canvas_scale[2].end = values.canvas_scale[2].start + 0.2;
 
                         objs.canvas.style.transform = `scale(${calcValues(values.canvas_scale, currentYOffset)})`;
+                        objs.canvas.style.marginTop = 0;
                     }
 
                     if (scrollRatio > values.canvas_scale[2].end &&
@@ -414,8 +418,6 @@
                         objs.canvasCaption.style.opacity = calcValues(values.canvasCaption_opacity, currentYOffset);
                         objs.canvasCaption.style.transfrom = `translate3d(0, ${calcValues(values.canvasCaption_translateY, currentYOffset)},0)`;
 
-                    } else {
-                        objs.canvas.style.marginTop = 0;
                     }
                 }
 
@@ -445,7 +447,7 @@
             sceneInfo[3].objs.images.push(imageEl3);
         }
     }
-    setCanvasImages();
+
 
     function checkMenu() {
         if (yOffset > 44) {
@@ -456,17 +458,58 @@
         }
     }
 
+    function loop() {
+        delayedYOffset = delayedYOffset + (yOffset - delayedYOffset) * acc;
+
+
+        if (!enterNewScene) {
+            if (currentScene === 0 || currentScene === 2) {
+                const objs = sceneInfo[currentScene].objs;
+                const values = sceneInfo[currentScene].values;
+                const currentYOffset = delayedYOffset - prevScrollHeight;
+                const sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+                if (objs.videoImages[sequence]) {
+                    objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                }
+            }
+        }
+
+        rafID = requestAnimationFrame(loop);
+
+        if (Math.abs(yOffset - delayedYOffset) < 1) {
+            cancelAnimationFrame(rafId);
+            rafState = false;
+        }
+
+    }
     window.addEventListener('load', () => {
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
         setLayout();
     });
-    window.addEventListener("resize", setLayout);
+
     window.addEventListener('scroll', () => {
         yOffset = window.pageYOffset;
         scrollLoop();
         checkMenu();
+
+        if (!rafState) {
+            rafID = requestAnimationFrame(loop);
+            rafState = true;
+        }
+
     });
 
-    setLayout();
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 900) {
+            setLayout();
+            sceneInfo[3].values.rectStartY = 0;
+        }
+    });
+
+    window.addEventListener('orientationchange', () => {
+        setLayout();
+    });
+
+    setCanvasImages();
 
 })();
