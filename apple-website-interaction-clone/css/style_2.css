@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap');
+:root {
+    --main-color: rgb(255, 255, 255);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+}
+
+body {
+    overflow-x: hidden;
+    color: var(--main-color);
+    letter-spacing: -0.05em;
+    background: #111;
+}
+
+a {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+p {
+    line-height: 1.5;
+}
+
+.container {
+    overflow-x: hidden;
+}
+
+.global-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 52px;
+    padding: 0 1rem;
+}
+
+.local-nav {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
+    height: 44px;
+    padding: 0 1rem;
+    z-index: 4;
+    border-bottom: #ccc 1px solid;
+}
+
+.global-nav-links,
+.local-nav-links {
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.global-nav-links {
+    justify-content: space-between;
+}
+
+.local-nav .product-name {
+    margin-right: auto;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.local-nav a:not(.product-name) {
+    margin-left: 2em;
+    font-size: 0.8em;
+}
+
+.scroll-section {
+    position: relative;
+    padding-top: 50vh;
+}
+
+#scroll-section-0 h1 {
+    position: relative;
+    top: -10vh;
+    text-align: center;
+    font-size: 4rem;
+    z-index: 4;
+}
+
+.main-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* top: 35vh; */
+    margin: 5px 0;
+    height: 3em;
+    font-size: 2.5rem;
+}
+
+.main-message p {
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.main-message small {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.5em;
+}
+
+#scroll-section-2 .main-message {
+    font-size: 3.5rem;
+}
+
+.description {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    color: #888;
+    font-size: 1.2rem;
+}
+
+.description strong {
+    float: left;
+    font-size: 3rem;
+    margin-right: 0.2em;
+    color: var(--main-color);
+}
+
+.desc-message {
+    width: 50%;
+    font-weight: bold;
+}
+
+.pin {
+    width: 1px;
+    height: 100px;
+    background: var(--main-color);
+}
+
+.mid-message {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    font-size: 2rem;
+    color: #888;
+}
+
+.mid-message strong {
+    color: var(--main-color);
+    display: block;
+}
+
+.canvas-caption {
+    max-width: 1000px;
+    margin: -5em auto 0;
+    padding: 0 1rem;
+    color: #888;
+    font-size: 1.2rem;
+}
+
+.footer {
+    background: rgb(63, 2, 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
+    color: #fff;
+}
+
+.sticky-elem {
+    display: block;
+    position: fixed;
+    left: 0;
+    width: 100%;
+}
+
+@media( min-width: 600px) {
+    #scroll-section-0 h1 {
+        font-size: 9vw;
+    }
+    .main-message {
+        font-size: 4vw;
+    }
+    .description {
+        font-size: 2rem;
+        padding: 0;
+    }
+    .description strong {
+        font-size: 6rem;
+    }
+    #scroll-section-2 .main-message {
+        font-size: 6vw;
+    }
+    .main-message small {
+        display: block;
+        font-size: 1.5vw;
+    }
+    .desc-message {
+        width: 20%;
+    }
+    .mid-message {
+        font-size: 4vw;
+        width: 1000px;
+        padding: 0;
+    }
+    .canvas-caption {
+        margin-top: -8rem;
+        font-size: 2rem;
+        padding: 0;
+    }
+}
