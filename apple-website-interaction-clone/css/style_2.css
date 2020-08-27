@@ -93,10 +93,11 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* top: 35vh; */
+    top: 35vh;
     margin: 5px 0;
     height: 3em;
     font-size: 2.5rem;
+    opacity: 0;
 }
 
 .main-message p {
@@ -172,10 +173,17 @@ p {
 }
 
 .sticky-elem {
-    display: block;
+    display: none;
     position: fixed;
     left: 0;
     width: 100%;
+}
+
+#scroll-active-0 #scroll-section-0 .sticky-elem,
+#scroll-active-1 #scroll-section-1 .sticky-elem,
+#scroll-active-2 #scroll-section-2 .sticky-elem,
+#scroll-active-3 #scroll-section-3 .sticky-elem {
+    display: block;
 }
 
 @media( min-width: 600px) {
