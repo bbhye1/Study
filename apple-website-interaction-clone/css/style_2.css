@@ -39,6 +39,7 @@ p {
     width: 100%;
     height: 52px;
     padding: 0 1rem;
+    z-index: 10;
 }
 
 .local-nav {
@@ -50,6 +51,7 @@ p {
     padding: 0 1rem;
     z-index: 4;
     border-bottom: #ccc 1px solid;
+    z-index: 10;
 }
 
 .global-nav-links,
@@ -114,6 +116,7 @@ p {
 
 #scroll-section-2 .main-message {
     font-size: 3.5rem;
+    z-index: 100;
 }
 
 .description {
@@ -232,4 +235,18 @@ p {
         font-size: 2rem;
         padding: 0;
     }
+}
+
+
+/* Canvas */
+
+.sticky-elem-canvas {
+    height: 100%;
+    top: 0;
+}
+
+.sticky-elem-canvas canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
