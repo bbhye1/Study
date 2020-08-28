@@ -447,6 +447,15 @@
         }
     }
 
+    function checkMenu() {
+        if (YOffset > 44) {
+            document.querySelector('.local-nav').classList.add('fixed');
+        } else {
+            document.querySelector('.local-nav').classList.remove('fixed');
+
+        }
+    }
+
     window.addEventListener('resize', () => {
         setLayout();
         scrollLoop();
@@ -454,6 +463,7 @@
     window.addEventListener('scroll', () => {
         YOffset = window.pageYOffset;
         scrollLoop();
+        checkMenu();
     });
     window.addEventListener('load', () => {
         setLayout();

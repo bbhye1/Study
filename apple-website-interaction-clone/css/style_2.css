@@ -54,6 +54,15 @@ p {
     z-index: 10;
 }
 
+.local-nav.fixed {
+    position: fixed;
+    top: 0;
+    -webkit-backdrop-filter: saturate(180%) blur(15px);
+    -moz-backdrop-filter: saturate(180%) blur(15px);
+    -o-backdrop-filter: saturate(180%) blur(15px);
+    backdrop-filter: saturate(180%) blur(15px);
+}
+
 .global-nav-links,
 .local-nav-links {
     display: flex;
