@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;900&display=swap');
-:root {
+ :root {
     --main-color: rgb(255, 255, 255);
 }
 
@@ -37,7 +37,7 @@ p {
     top: 0;
     left: 0;
     width: 100%;
-    height: 52px;
+    height: 44px;
     padding: 0 1rem;
     z-index: 10;
 }
@@ -47,7 +47,7 @@ p {
     top: 45px;
     left: 0;
     width: 100%;
-    height: 44px;
+    height: 52px;
     padding: 0 1rem;
     z-index: 4;
     border-bottom: #ccc 1px solid;
@@ -116,7 +116,6 @@ p {
 
 #scroll-section-2 .main-message {
     font-size: 3.5rem;
-    z-index: 100;
 }
 
 .description {
@@ -172,7 +171,7 @@ p {
 
 .canvas-caption {
     max-width: 1000px;
-    margin: -5em auto 0;
+    margin: -8 em auto 0;
     padding: 0 1rem;
     color: #888;
     font-size: 1.2rem;
@@ -219,11 +218,17 @@ p {
         font-size: 6vw;
     }
     .main-message small {
-        display: block;
         font-size: 1.5vw;
     }
     .desc-message {
         width: 20%;
+    }
+    #scroll-section-2 .b {
+        top: 20%;
+        left: 53%;
+    }
+    #scroll-section-2 .c {
+        left: 55%;
     }
     .mid-message {
         font-size: 4vw;
@@ -249,4 +254,15 @@ p {
     position: absolute;
     top: 50%;
     left: 50%;
+}
+
+.image-blend-canvas.sticky {
+    position: fixed;
+    top: 0;
+}
+
+#scroll-section-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
