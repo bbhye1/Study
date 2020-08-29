@@ -275,3 +275,58 @@ p {
     flex-direction: column;
     align-items: center;
 }
+
+
+/* loading */
+
+.loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #000;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.loading-circle {
+    width: 54px;
+    height: 54px;
+    animation: loading-spin-ani 1s infinite linear;
+}
+
+.loading-circle circle {
+    stroke: #fff;
+    stroke-width: 4;
+    fill: none;
+    stroke-dasharray: 157;
+    stroke-dashoffset: 157;
+    animation: loading-circle-ani 3s infinite;
+}
+
+.before-load .loading {
+    opacity: 1;
+}
+
+@keyframes loading-circle-ani {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    65% {
+        stroke-dashoffset: -147;
+    }
+    100% {
+        stroke-dashoffset: -157;
+    }
+}
+
+@keyframes loading-spin-ani {
+    to {
+        transform: rotate(360deg);
+    }
+}
