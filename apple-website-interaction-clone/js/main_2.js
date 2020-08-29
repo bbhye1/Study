@@ -488,8 +488,10 @@
 
 
     window.addEventListener('resize', () => {
-        setLayout();
-        scrollLoop();
+        if (window.innerWidth > 600) {
+            setLayout();
+            sceneInfo[3].values.rectStartY = 0;
+        }
     });
     window.addEventListener('scroll', () => {
         YOffset = window.pageYOffset;
@@ -504,8 +506,10 @@
     });
     window.addEventListener('load', () => {
         setLayout();
-        setCanvasImages();
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
     });
+    window.addEventListener('orientationchange', setLayout);
+
+    setCanvasImages();
 
 })();
