@@ -108,7 +108,7 @@
         }
     ];
 
-    let YOffset;
+    let YOffset = pageYOffset;
     let currentScene = 0;
     let prevScrollHeight = 0;
     let enterNewScene = false; //새로운 씬이 시작되는 순간 true
@@ -487,34 +487,72 @@
     }
 
 
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 600) {
-            setLayout();
-            sceneInfo[3].values.rectStartY = 0;
-        }
-    });
-    window.addEventListener('scroll', () => {
-        YOffset = window.pageYOffset;
 
-        scrollLoop();
-        checkMenu();
-
-        if (!rafState) {
-            rafId = requestAnimationFrame(loop);
-            rafState = true;
-        }
-    });
 
     window.addEventListener('load', () => {
+        document.body.classList.remove('before-load');
         setLayout();
         sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
 
-        document.body.classList.remove('before-load');
+        let tempYoffset = YOffset;
+        let tempScrollCount = 0;
+
+        if (YOffset > 0) {
+            let siId = setInterval(() => {
+                window.scrollTo(0, tempYoffset);
+                tempYoffset += 5;
+
+                if (tempScrollCount > 15) {
+                    clearInterval(siId);
+                }
+                tempScrollCount++;
+            }, 20);
+
+        }
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                setLayout();
+                sceneInfo[3].values.rectStartY = 0;
+            }
+            if (currentScene === 3 && window.innerWidth > 450) {
+                let tempYoffset = YOffset;
+                let tempScrollCount = 0;
+
+                if (YOffset > 0) {
+                    let siId = setInterval(() => {
+                        window.scrollTo(0, tempYoffset);
+                        tempYoffset -= 50;
+
+                        if (tempScrollCount > 20) {
+                            clearInterval(siId);
+                        }
+                        tempScrollCount++;
+                    }, 20);
+
+                }
+            }
+        });
+        window.addEventListener('scroll', () => {
+            YOffset = window.pageYOffset;
+
+            scrollLoop();
+            checkMenu();
+
+            if (!rafState) {
+                rafId = requestAnimationFrame(loop);
+                rafState = true;
+            }
+        });
+        window.addEventListener('orientationchange', () => {
+            setTimeout(setLayout, 200)
+        });
+        document.querySelector('.loading').addEventListener('transitionend', (e) => {
+            document.body.removeChild(e.currentTarget);
+        })
+
     });
-    window.addEventListener('orientationchange', setLayout);
-    document.querySelector('.loading').addEventListener('transitionend', (e) => {
-        document.body.removeChild(e.currentTarget);
-    })
+
     setCanvasImages();
 
 })();

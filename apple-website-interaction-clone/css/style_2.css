@@ -19,6 +19,10 @@ body {
     background: #000;
 }
 
+body.before-load {
+    overflow: hidden;
+}
+
 a {
     text-decoration: none;
     color: var(--main-color);
@@ -180,7 +184,7 @@ p {
 
 .canvas-caption {
     max-width: 1000px;
-    margin: -8 em auto 0;
+    margin: -26em auto 0;
     padding: 0 1rem;
     color: #888;
     font-size: 1.2rem;
@@ -207,6 +211,7 @@ p {
 #scroll-active-2 #scroll-section-2 .sticky-elem,
 #scroll-active-3 #scroll-section-3 .sticky-elem {
     display: block;
+    will-change: transform, opacity;
 }
 
 @media( min-width: 600px) {
@@ -311,6 +316,10 @@ p {
 
 .before-load .loading {
     opacity: 1;
+}
+
+.before-load .container {
+    display: none;
 }
 
 @keyframes loading-circle-ani {
