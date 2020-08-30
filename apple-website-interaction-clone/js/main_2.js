@@ -165,7 +165,9 @@
 
         if (delayedYoffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
             enterNewScene = true;
-            currentScene++;
+            if (currentScene < sceneInfo.length - 1) {
+                currentScene++;
+            }
             document.body.setAttribute('id', `scroll-active-${currentScene}`);
         }
         if (delayedYoffset < prevScrollHeight) {
@@ -533,6 +535,7 @@
                 }
             }
         });
+
         window.addEventListener('scroll', () => {
             YOffset = window.pageYOffset;
 

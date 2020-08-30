@@ -339,3 +339,7 @@ p {
         transform: rotate(360deg);
     }
 }
+
+.normal-content {
+    margin-bottom: 10rem;
+}
