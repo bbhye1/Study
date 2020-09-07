@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent, createRef } from "react";
 import Try from "./Try";
 
 function getNumbers() {
@@ -37,6 +37,9 @@ class NumberBaseball extends PureComponent {
         answer: getNumbers(),
         tries: [],
       });
+
+      // this.inputRef.focus();
+      this.inputRef.current.focus();
     } else {
       const answerArray = value.split("").map((v) => parseInt(v));
       let strike = 0;
@@ -53,6 +56,8 @@ class NumberBaseball extends PureComponent {
           answer: getNumbers(),
           tries: [],
         });
+        // this.inputRef.focus();
+        this.inputRef.current.focus();
       } else {
         for (let i = 0; i < 4; i++) {
           if (answerArray[i] === answer[i]) {
@@ -73,6 +78,9 @@ class NumberBaseball extends PureComponent {
             value: "",
           };
         });
+
+        // this.inputRef.focus();
+        this.inputRef.current.focus();
       }
     }
 
@@ -86,6 +94,12 @@ class NumberBaseball extends PureComponent {
     });
   };
 
+  inputRef = createRef();
+
+  // onInputRef = (c) => {
+  //   this.inputRef = c;
+  // };
+
   render() {
     const { result, value, tries } = this.state;
     return (
@@ -94,6 +108,8 @@ class NumberBaseball extends PureComponent {
         <div>{result}</div>
         <form onSubmit={this.onSubmitForm}>
           <input
+            // ref={this.onInputRef}
+            ref={this.inputRef}
             maxLength={4}
             value={value}
             onChange={this.onChangeInput}
