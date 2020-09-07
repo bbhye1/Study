@@ -4,7 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Response Check</title>
-    <style></style>
+    <style>
+      #screen {
+        width: 300px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        user-select: none;
+      }
+      #screen.waiting {
+        background: aqua;
+      }
+      #screen.ready {
+        background: red;
+        color: #fff;
+      }
+      #screen.now {
+        background: greenyellow;
+      }
+    </style>
     <script defer src="./dist/app.js"></script>
   </head>
   <body>
