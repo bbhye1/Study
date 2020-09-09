@@ -1,14 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 import Td from "./Td";
-import Table from "./Table";
 
-const Tr = ({ rowData, rowIndex, dispatch }) => {
+const Tr = memo(({ rowData, rowIndex, dispatch }) => {
+  console.log("td rendered");
+
   return (
     <tr>
       {Array(rowData.length)
         .fill()
         .map((td, i) => (
           <Td
+            key={"td:" + i}
             dispatch={dispatch}
             rowIndex={rowIndex}
             cellIndex={i}
@@ -19,5 +21,5 @@ const Tr = ({ rowData, rowIndex, dispatch }) => {
         ))}
     </tr>
   );
-};
+});
 export default Tr;
