@@ -43,17 +43,17 @@ const getTdText = (code) => {
     case CODE.NORMAL:
       return "";
     case CODE.MINE:
-      return "X";
+      return "💣";
     case CODE.CLICKED_MINE:
-      return "펑";
+      return "😖";
     case CODE.FLAG:
     case CODE.FLAG_MINE:
-      return "!";
+      return "🏳️";
     case CODE.QUESTION_MINE:
     case CODE.QUESTION:
-      return "?";
+      return "❓";
     default:
-      return "";
+      return code || "";
   }
 };
 
