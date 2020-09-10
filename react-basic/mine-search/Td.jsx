@@ -1,4 +1,4 @@
-import React, { useContext, useCallback } from "react";
+import React, { useContext, useCallback, memo } from "react";
 import {
   TableContext,
   CODE,
@@ -43,7 +43,7 @@ const getTdText = (code) => {
     case CODE.NORMAL:
       return "";
     case CODE.MINE:
-      return "💣";
+      return "";
     case CODE.CLICKED_MINE:
       return "😖";
     case CODE.FLAG:
@@ -57,7 +57,7 @@ const getTdText = (code) => {
   }
 };
 
-const Td = ({ rowIndex, cellIndex }) => {
+const Td = memo(({ rowIndex, cellIndex }) => {
   const { tableData, dispatch, halted } = useContext(TableContext);
 
   const onClickTd = useCallback(() => {
@@ -114,6 +114,6 @@ const Td = ({ rowIndex, cellIndex }) => {
       {getTdText(tableData[rowIndex][cellIndex])}
     </td>
   );
-};
+});
 
 export default Td;
