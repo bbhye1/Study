@@ -1,7 +1,7 @@
 import "./VideoItem.css";
 import React from "react";
 
-const VideoItem = ({ video }) => {
+const VideoItem = ({ video, onVideoSelect }) => {
   const getPublishTime = (video) => {
     const nowTime = new Date();
     const publishTime = new Date(video.snippet.publishTime);
@@ -27,17 +27,17 @@ const VideoItem = ({ video }) => {
   };
 
   return (
-    <div className="video-item item ">
+    <div className="video-item item" onClick={() => onVideoSelect(video)}>
       <img
         className="ui image"
-        alt={video.snippet.description}
+        alt={video.snippet.title}
         src={video.snippet.thumbnails.medium.url}
       />
       <div className="content">
         <div className="header"> {video.snippet.title}</div>
         <div className="description">
           {video.snippet.channelTitle}
-          {getPublishTime(video)}
+          <span>{getPublishTime(video)}</span>
         </div>
       </div>
     </div>
